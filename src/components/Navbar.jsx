@@ -1,5 +1,7 @@
-import { Box, Flex, Link, Button } from "@chakra-ui/react";
+import { Box, Flex, Button } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
+
+const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
 const Navbar = () => {
   return (
@@ -18,10 +20,32 @@ const Navbar = () => {
             </Button>
           </NavLink>
           <NavLink to="/contact" exact>
-            <Button variant="link" color="white">
+            <Button variant="link" color="white" mr={4}>
               Contact
             </Button>
           </NavLink>
+          <NavLink to="/register" exact>
+            <Button variant="link" color="white" mr={4}>
+              Register
+            </Button>
+          </NavLink>
+          <NavLink to="/login" exact>
+            <Button variant="link" color="white">
+              Login
+            </Button>
+          </NavLink>
+          {loggedInUser && (
+            <Button
+              variant="link"
+              color="white"
+              onClick={() => {
+                localStorage.removeItem("loggedInUser");
+                window.location.reload();
+              }}
+            >
+              Logout
+            </Button>
+          )}
         </Flex>
       </Flex>
     </Box>
